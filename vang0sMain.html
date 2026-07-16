@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <div id=osHeader style="display: flex; gap: 10px;">
+            <p>Vang0s, a simple web OS</p>
+        </div>
+        
+        
+        <div style="border: solid; width: 70px; padding:16px; position: fixed; bottom: 0; right: 0;">
+            <p id="currentTime"></p>
+        </div>
+
+
+        <style>
+        #mydiv {
+                position: absolute;
+                z-index: 99;
+                background-color: #f1f1f1;
+                border: 1px solid #d3d3d3;
+                text-align: center;
+            }
+
+            #mydivheader {
+                padding: 10px;
+                cursor: move;
+                z-index: 100;
+                background-color: #2196F3;
+                color: #fff;    
+            }
+
+            #mydiv p {
+                margin: 10px;
+            }
+
+        </style>
+
+        <!-- Draggable DIV -->
+        <div id="mydiv">
+            <div id="mydivheader">____________- # X</div>
+            <p>this</p>
+            <p>should</p>
+            <p>move</p>
+        </div>
+
+        <script>
+        dragElement(document.getElementById("mydiv"));
+        function dragElement(element){
+            var initialX = 0;
+            var initialY = 0;
+            var currentX = 0;
+            var currentY = 0;
+
+            if (document.getElementById(element.id + "header")) {
+                document.getElementById(element.id + "header").onmousedown = startDragging;
+            } else { 
+                element.onmousedown = startDragging;
+            }
+
+            function startDragging(e) {
+                e = e || window.event;
+                e.preventDefault();
+
+                initialX = e.clientX;
+                initialY = e.clientY;
+                document.onmouseup = stopDragging;
+                document.onmousedown = dragElement;
+
+                element.style.top = (element.offsetTop - currentY) + "px";
+                element.style.left = (element.offsetLeft - currentX) + "px";
+
+                function stopDragging() {
+                    document.onmouseup = null;
+                    document.onmousedown = null;
+                }
+            }
+        }
+
+        </script>
+
+        <script>
+            document.getElementById("currentTime").textContent =
+                new Date().toLocaleDateString();
+        </script>
+
+    </body>
+</html>
