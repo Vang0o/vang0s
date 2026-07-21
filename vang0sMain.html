@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <body style="background-color: #C8963E;">
+  <body style="background-color: #8A84E2;">
 
     <div id="osHeader" style="display: flex; gap: 10px;">
       <p>Vang0s, a simple web OS</p>
@@ -15,20 +15,28 @@
       <p id="currentTime"></p>
     </div>
 
+    <button id="folder" style="position: fixed; bottom: 20px; left: 80px; padding: 10px; background-color: #555; color: white; border: none; cursor: pointer;">
+      Open Folder
+    </button>
+
+    <button id="settings" style="position: fixed; bottom: 20px; left: 180px; padding: 10px; background-color: #555; color: white; border: none; cursor: pointer;">
+      Open Settings
+    </button>
+
     <style>
       #mydiv {
         position: absolute;
         z-index: 99;
         background-color: #f1f1f1;
-        border: 1px solid #d3d3d3;
+        border: 1px solid #000000;
         text-align: center;
       }
       #mydivheader {
         padding: 10px;
         cursor: move;
         z-index: 100;
-        background-color: #2196F3;
-        color: #fff;
+        background-color: #8A84E2;
+        color: #000000;
       }
       #mydiv p {
         margin: 10px;
@@ -98,6 +106,10 @@
     <!-- Time script -->
     <script>
       document.getElementById("currentTime").textContent = new Date().toLocaleDateString();
+      /*
+        document.getElementById("currentTime").textContent = new Date().toLocaleString();
+        this works but it needs to update every second & be formatted correctly.
+      */
     </script>
 
   </body>
