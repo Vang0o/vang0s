@@ -3,25 +3,8 @@
 
   <body style="background-color: #8A84E2;">
 
-    <div id="osHeader" style="display: flex; gap: 10px;">
-      <p>Vang0s, a simple web OS</p>
-    </div>
-
-    <div id="taskbar" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #333; color: white; padding: 10px; z-index:2">
-      <p>Taskbar</p>
-    </div>
-
-    <div id="time" style="border: solid; width: 60px; padding:8px; position: fixed; bottom: 0; right: 0; color: white;">
-      <p id="currentTime"></p>
-    </div>
-
-    
-    <button id="folderIcon" style="position: fixed; bottom: 20px; left: 80px; padding: 0; background: none; border: none; cursor: pointer; z-index:3;">
-      <img src="folderIcon.png" alt="Folder" style="width: 40px; height: 40px; display: block;">
-    </button>
-
     <style>
-      .folder{
+      folder{
       background-color: #8A84E2;
       padding: 15px;
       margin: 10px;
@@ -30,114 +13,35 @@
       }
     </style>
 
-    <div id="folderApp"></div>
 
-    <script>
-      const folderButton = document.getElementById("folderIcon");
-      const folderWindow = document.createElement("folderApp");
-      folderButton.addEventListener("click", function() {
-        const folderApp = document.createElement("div");
-        folderApp.classList.add("folder");
-        folderApp.innerHTML = "<h2>Folder App</h2><p>This should be a folder</p>";
-        document.getElementById("folderApp").appendChild(folderApp);
-      }); 
+    <div id="osHeader" style="display: flex; gap: 10px;">
+      <p>Vang0s, a simple web OS</p>
+    </div>
 
+    <div id="taskbar" style="position: fixed; bottom: 0; left: 0; width: 100%; background-color: #333; color: white; padding: 10px; z-index:2">
+      <p>Taskbar</p>
+    </div>
 
-    </script>
+    <div id="time" style="border: 1px; width: 60px; padding:6px; position: fixed; bottom: 0; right: 0; color: white; text-align: center; z-index: 3;">
+      <p id="currentTime"></p>
+    </div>
 
-
-    <button id="settings" style="position: fixed; bottom: 20px; left: 180px; padding: 10px; background-color: #555; color: white; border: none; cursor: pointer; z-index:3">
-      Open Settings
+    <button id="folderIcon" style="position: fixed; bottom: 20px; left: 80px; padding: 0; background: none; border: none; cursor: pointer; z-index:3;">
+      <img src="folderIcon.png" alt="Folder" style="width: 40px; height: 40px; display: block;">
     </button>
 
-    <style>
-      #mydiv {
-        position: absolute;
-        z-index: 99;
-        background-color: #f1f1f1;
-        border: 1px solid #000000;
-        text-align: center;
-      }
-      #mydivheader {
-        padding: 10px;
-        cursor: move;
-        z-index: 100;
-        background-color: #8A84E2;
-        color: #000000;
-      }
-      #mydiv p {
-        margin: 10px;
-      }
-    </style>
+    <div id="folderApp"></div>
 
-    <!-- Draggable DIV -->
-    <div id="mydiv">
-      <div id="mydivheader">____________- # X</div>
-      <p>this</p>
-      <p>moves</p>
-    </div>
+
+
     
+    <script src="makeDraggable.js"></script>
+
+    <script src="folderApp.js"></script>
+
+    <script src="giveTime.js"></script>
 
 
-
-    <!-- Draggable script -->
-    <script>
-      dragElement(document.getElementById("mydiv"));
-
-      function dragElement(element) {
-        var initialX = 0, initialY = 0, currentX = 0, currentY = 0;
-        
-        if (document.getElementById(element.id + "header")) {
-          document.getElementById(element.id + "header").onmousedown = startDragging;
-        } else {
-          element.onmousedown = startDragging;
-        }
-
-        function startDragging(e) {
-          e = e || window.event;
-          e.preventDefault();
-          
-          // Capture original mouse coordinates
-          initialX = e.clientX;
-          initialY = e.clientY;
-          
-          document.onmouseup = stopDragging;
-          document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-          e = e || window.event;
-          e.preventDefault();
-          
-          currentX = initialX - e.clientX;
-          currentY = initialY - e.clientY;
-          
-          initialX = e.clientX;
-          initialY = e.clientY;
-          
-          // Apply the new position to the element
-          element.style.top = (element.offsetTop - currentY) + "px";
-          element.style.left = (element.offsetLeft - currentX) + "px";
-        }
-
-        function stopDragging() {
-          // Clear listeners when mouse is released
-          document.onmouseup = null;
-          document.onmousemove = null;
-        }
-      }
-    </script>
-
-
-
-    <!-- Time script -->
-    <script>
-      document.getElementById("currentTime").textContent = new Date().toLocaleDateString();
-      /*
-        document.getElementById("currentTime").textContent = new Date().toLocaleString();
-        this works but it needs to update every second & be formatted correctly.
-      */
-    </script>
 
   </body>
 </html>
